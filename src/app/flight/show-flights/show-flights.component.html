@@ -1,0 +1,35 @@
+<table class="table table-striped">
+    <thead>
+        <tr>
+
+            <th>
+                Flight NO</th>
+            <th>
+                Origin Country</th>
+            <th>
+                <div class="d-flex flex-row">
+                    <input [(ngModel)]="destinationCountryFilter" class="form-control" (keyup)="FilterFn()" placeholder="Filter">
+                </div>
+                Destination</th>
+            <th>
+                <ngbd-datepicker-range-popup></ngbd-datepicker-range-popup>
+                Departure Date</th>
+            <th>arrival Date</th>
+            <th>Price</th>
+            <th>Seat Amount</th>
+            <th>Company ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let flight of flightList">
+            <td>{{flight.flightNO}}</td>
+            <td>{{flight.originCountry}}</td>
+            <td>{{flight.destinationCountry}}</td>
+            <td>{{flight.departureDate}}</td>
+            <td>{{flight.arrivalDate}}</td>
+            <td>{{flight.price}}</td>
+            <td>{{flight.seatAmount}}</td>
+            <td>{{flight.companyID}}</td>
+        </tr>
+    </tbody>
+</table>
