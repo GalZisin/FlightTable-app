@@ -1,4 +1,4 @@
-Flight table with country filters and datepicker filter.
+Flight table with destination country filters and datepicker filter.
 
 # ClientApp
 
