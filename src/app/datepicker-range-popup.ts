@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   NgbDate,
   NgbCalendar,
   NgbDateParserFormatter,
+  NgbInputDatepicker,
 } from '@ng-bootstrap/ng-bootstrap';
 import { SharedService } from './shared.service';
 
@@ -42,6 +43,7 @@ import { SharedService } from './shared.service';
   ],
 })
 export class NgbdDatepickerRangePopup {
+  @ViewChild('datepicker') elDatepicker: NgbInputDatepicker;
   hoveredDate: NgbDate | null = null;
 
   fromDate: NgbDate | null;
@@ -91,6 +93,8 @@ export class NgbdDatepickerRangePopup {
       console.log(
         'changeDatePickData: ' + fromDateFormated + ':' + toDateFormated
       );
+
+      this.elDatepicker.close();
     } else {
       this.toDate = null;
       this.fromDate = date;

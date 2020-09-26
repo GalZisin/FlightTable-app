@@ -8,8 +8,6 @@ import { NgbdDatepickerRangePopup } from '../../datepicker-range-popup';
 })
 export class ShowFlightsComponent implements OnInit {
   @ViewChild(NgbdDatepickerRangePopup) dpRangePopup: NgbdDatepickerRangePopup;
-  // @ViewChild('dpFromDate', { static: true }) dpFromDate: ElementRef;
-  // @ViewChild('dpToDate', { static: true }) dpToDate: ElementRef;
   flightList: any = [];
   destinationCountryFilter: string = '';
   fromDepartureDateFilter: string = '';
@@ -41,7 +39,32 @@ export class ShowFlightsComponent implements OnInit {
     this.refreshFlightList();
   }
   refreshFlightList() {
-    console.log('onInit');
+    console.log('dpRangePopup' + this.dpRangePopup);
+    if (!this.dpRangePopup == undefined) {
+      let month: string = this.dpRangePopup.fromDate.month.toString();
+      if (month.length < 2) {
+        month = '0' + month;
+      }
+      let day: string = this.dpRangePopup.fromDate.day.toString();
+      if (day.length < 2) {
+        day = '0' + day;
+      }
+
+      this.fromDepartureDateFilter =
+        this.dpRangePopup.fromDate.year + '-' + month + '-' + day;
+
+      month = this.dpRangePopup.toDate.month.toString();
+      if (month.length < 2) {
+        month = '0' + month;
+      }
+      day = this.dpRangePopup.toDate.day.toString();
+      if (day.length < 2) {
+        day = '0' + day;
+      }
+
+      this.toDepartureDateFilter =
+        this.dpRangePopup.toDate.year + '-' + month + '-' + day;
+    }
     this.service
       .getFlightList(
         this.destinationCountryFilter == ''
@@ -56,20 +79,6 @@ export class ShowFlightsComponent implements OnInit {
   }
 
   FilterFn() {
-    console.log('dpRangePopup: ' + JSON.stringify(this.dpRangePopup.fromDate));
-    this.fromDepartureDateFilter =
-      this.dpRangePopup.fromDate.year +
-      '-' +
-      this.dpRangePopup.fromDate.month +
-      '-' +
-      this.dpRangePopup.fromDate.day;
-    this.toDepartureDateFilter =
-      this.dpRangePopup.toDate.year +
-      '-' +
-      this.dpRangePopup.toDate.month +
-      '-' +
-      this.dpRangePopup.toDate.day;
-
     this.refreshFlightList();
   }
 }
